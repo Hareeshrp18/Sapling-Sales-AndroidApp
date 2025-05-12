@@ -1,0 +1,214 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.coordinatorlayout.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/lightGreen">
+
+    <com.google.android.material.appbar.AppBarLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <androidx.appcompat.widget.Toolbar
+            android:id="@+id/toolbar"
+            android:layout_width="match_parent"
+            android:layout_height="?attr/actionBarSize"
+            android:background="@color/forestGreen"
+            android:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar"
+            app:popupTheme="@style/ThemeOverlay.AppCompat.Light" />
+
+    </com.google.android.material.appbar.AppBarLayout>
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:fillViewport="true"
+        app:layout_behavior="@string/appbar_scrolling_view_behavior">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:padding="24dp"
+            android:orientation="vertical"
+            android:background="@drawable/nature_background"
+            android:gravity="center_horizontal">
+
+            <!-- Header Section -->
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Add Product"
+                android:textSize="28sp"
+                android:textStyle="bold"
+                android:textColor="@color/forestGreen"
+                android:layout_marginBottom="24dp"
+                android:letterSpacing="0.05" />
+
+            <!-- Product Name -->
+            <com.google.android.material.textfield.TextInputLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="16dp"
+                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+                app:boxStrokeColor="@color/forestGreen"
+                app:hintTextColor="@color/forestGreen"
+                android:textColorHint="@color/forestGreen">
+
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/editTextProductName"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:hint="Product Name"
+                    android:textColor="@color/black"
+                    android:inputType="text" />
+            </com.google.android.material.textfield.TextInputLayout>
+
+            <!-- Description -->
+            <com.google.android.material.textfield.TextInputLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="16dp"
+                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+                app:boxStrokeColor="@color/forestGreen"
+                app:hintTextColor="@color/forestGreen"
+                android:textColorHint="@color/forestGreen">
+
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/editTextProductDescription"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:hint="Product Description"
+                    android:textColor="@color/black"
+                    android:inputType="textMultiLine"
+                    android:minLines="3" />
+            </com.google.android.material.textfield.TextInputLayout>
+
+            <!-- Price -->
+            <com.google.android.material.textfield.TextInputLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="16dp"
+                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+                app:boxStrokeColor="@color/forestGreen"
+                app:hintTextColor="@color/forestGreen"
+                android:textColorHint="@color/forestGreen">
+
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/editTextProductPrice"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:hint="Product Price"
+                    android:textColor="@color/black"
+                    android:inputType="numberDecimal" />
+            </com.google.android.material.textfield.TextInputLayout>
+
+            <!-- Quantity -->
+            <com.google.android.material.textfield.TextInputLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="16dp"
+                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+                app:boxStrokeColor="@color/forestGreen"
+                app:hintTextColor="@color/forestGreen"
+                android:textColorHint="@color/forestGreen">
+
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/editTextQuantity"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:hint="Quantity"
+                    android:textColor="@color/black"
+                    android:inputType="number" />
+            </com.google.android.material.textfield.TextInputLayout>
+
+            <!-- Category Spinner -->
+            <com.google.android.material.textfield.TextInputLayout
+                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.ExposedDropdownMenu"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="16dp"
+                app:boxStrokeColor="@color/forestGreen"
+                app:hintTextColor="@color/forestGreen"
+                android:hint="Select Category">
+
+                <AutoCompleteTextView
+                    android:id="@+id/spinnerCategory"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:textColor="@color/black"
+                    android:inputType="none"/>
+
+            </com.google.android.material.textfield.TextInputLayout>
+
+            <!-- Status Spinner -->
+            <com.google.android.material.textfield.TextInputLayout
+                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.ExposedDropdownMenu"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="16dp"
+                app:boxStrokeColor="@color/forestGreen"
+                app:hintTextColor="@color/forestGreen"
+                android:hint="Select Status">
+
+                <AutoCompleteTextView
+                    android:id="@+id/spinnerStatus"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:textColor="@color/black"
+                    android:inputType="none"/>
+
+            </com.google.android.material.textfield.TextInputLayout>
+
+            <!-- Image RecyclerView -->
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/recyclerViewImages"
+                android:layout_width="match_parent"
+                android:layout_height="200dp"
+                android:layout_marginBottom="16dp"
+                android:padding="8dp"
+                android:background="@android:color/white"
+                app:layoutManager="androidx.recyclerview.widget.GridLayoutManager"
+                app:spanCount="2" />
+
+            <!-- Select Image Button -->
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/buttonSelectImage"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="16dp"
+                android:text="Select Images"
+                android:padding="12dp"
+                app:cornerRadius="8dp"
+                android:textSize="16sp"
+                app:icon="@drawable/ic_add"
+                app:iconGravity="textStart"
+                android:backgroundTint="@color/forestGreen"
+                android:textColor="@android:color/white" />
+
+            <!-- Upload Button -->
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/buttonUpload"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Upload Product"
+                android:padding="12dp"
+                app:cornerRadius="8dp"
+                android:textSize="16sp"
+                app:icon="@drawable/ic_upload"
+                app:iconGravity="textStart"
+                android:backgroundTint="@color/forestGreen"
+                android:textColor="@android:color/white" />
+
+            <!-- Progress Bar -->
+            <ProgressBar
+                android:id="@+id/progressBar"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="16dp"
+                android:layout_gravity="center"
+                android:indeterminateTint="@color/forestGreen"
+                android:visibility="gone" />
+
+        </LinearLayout>
+    </ScrollView>
+</androidx.coordinatorlayout.widget.CoordinatorLayout>

@@ -1,0 +1,17 @@
+<selector xmlns:android="http://schemas.android.com/apk/res/android">
+    <item android:state_pressed="true">
+        <shape>
+            <solid android:color="@color/admin_button_color" />
+            <corners android:radius="16dp"/>
+            <elevation android:value="8dp"/>
+        </shape>
+    </item>
+
+    <item>
+        <shape>
+            <solid android:color="@color/admin_button_color" />
+            <corners android:radius="16dp"/>
+            <elevation android:value="4dp"/>
+        </shape>
+    </item>
+</selector>

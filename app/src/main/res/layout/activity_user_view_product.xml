@@ -1,0 +1,197 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.coordinatorlayout.widget.CoordinatorLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@android:color/white">
+
+    <com.google.android.material.appbar.AppBarLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/forestGreen"
+        app:elevation="4dp">
+
+        <androidx.appcompat.widget.Toolbar
+            android:id="@+id/toolbar"
+            android:layout_width="match_parent"
+            android:layout_height="?attr/actionBarSize"
+            android:background="@color/forestGreen"
+            android:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar"
+            app:menu="@menu/menu_share">
+
+            <ImageView
+                android:id="@+id/btnFavorite"
+                android:layout_width="24dp"
+                android:layout_height="24dp"
+                android:layout_gravity="end"
+                android:layout_marginEnd="16dp"
+                android:src="@drawable/ic_favorite_border"
+                android:background="?attr/selectableItemBackgroundBorderless"/>
+
+        </androidx.appcompat.widget.Toolbar>
+
+    </com.google.android.material.appbar.AppBarLayout>
+
+    <androidx.core.widget.NestedScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@android:color/white"
+        app:layout_behavior="@string/appbar_scrolling_view_behavior">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <!-- Progress Bar -->
+            <ProgressBar
+                android:id="@+id/progressBar"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:visibility="gone"
+                android:indeterminateTint="@color/forestGreen" />
+
+            <!-- Image Slider Container -->
+            <FrameLayout
+                android:layout_width="match_parent"
+                android:layout_height="300dp"
+                android:background="#F5F5F5">
+
+                <androidx.recyclerview.widget.RecyclerView
+                    android:id="@+id/imageSlider"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent" />
+
+                <!-- Image Counter Badge -->
+                <TextView
+                    android:id="@+id/imageCounterBadge"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="end|top"
+                    android:layout_margin="16dp"
+                    android:background="@drawable/badge_background"
+                    android:paddingHorizontal="8dp"
+                    android:paddingVertical="4dp"
+                    android:textColor="@android:color/white"
+                    android:textSize="12sp"
+                    android:visibility="gone" />
+            </FrameLayout>
+
+            <!-- Product Details Container -->
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:padding="16dp">
+
+                <!-- Product Name -->
+                <TextView
+                    android:id="@+id/tvProductName"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:textSize="24sp"
+                    android:textStyle="bold"
+                    android:textColor="#212121"
+                    android:fontFamily="sans-serif-medium" />
+
+                <!-- Price -->
+                <TextView
+                    android:id="@+id/tvProductPrice"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="8dp"
+                    android:textSize="20sp"
+                    android:textStyle="bold"
+                    android:textColor="@color/forestGreen"
+                    android:fontFamily="sans-serif-medium" />
+
+                <!-- Category Badge -->
+                <TextView
+                    android:id="@+id/tvProductCategory"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="12dp"
+                    android:background="@drawable/category_badge_background"
+                    android:paddingHorizontal="12dp"
+                    android:paddingVertical="6dp"
+                    android:textColor="@android:color/white"
+                    android:textSize="14sp"
+                    android:fontFamily="sans-serif-medium" />
+
+                <!-- Status -->
+                <TextView
+                    android:id="@+id/tvStatus"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="8dp"
+                    android:textSize="16sp"
+                    android:textColor="#757575"
+                    android:fontFamily="sans-serif"
+                    android:visibility="gone" />
+
+                <!-- Description Title -->
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="24dp"
+                    android:text="Description"
+                    android:textSize="18sp"
+                    android:textStyle="bold"
+                    android:textColor="#212121"
+                    android:fontFamily="sans-serif-medium" />
+
+                <!-- Description -->
+                <TextView
+                    android:id="@+id/tvProductDescription"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="8dp"
+                    android:textSize="16sp"
+                    android:textColor="#424242"
+                    android:lineSpacingExtra="4dp"
+                    android:fontFamily="sans-serif" />
+
+                <!-- Similar Products Title -->
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="24dp"
+                    android:text="Similar Products"
+                    android:textSize="18sp"
+                    android:textStyle="bold"
+                    android:textColor="#212121"
+                    android:fontFamily="sans-serif-medium" />
+
+                <!-- Similar Products RecyclerView -->
+                <androidx.recyclerview.widget.RecyclerView
+                    android:id="@+id/rvSimilarProducts"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="12dp"
+                    android:clipToPadding="false"
+                    android:paddingHorizontal="8dp"
+                    android:paddingBottom="80dp" />
+
+            </LinearLayout>
+        </LinearLayout>
+    </androidx.core.widget.NestedScrollView>
+
+    <!-- Add to Cart Button -->
+    <com.google.android.material.button.MaterialButton
+        android:id="@+id/btnAddToCart"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="bottom"
+        android:layout_margin="16dp"
+        android:padding="16dp"
+        android:text="Add to Cart"
+        android:textAllCaps="false"
+        android:textSize="16sp"
+        android:fontFamily="sans-serif-medium"
+        android:backgroundTint="@color/forestGreen"
+        app:cornerRadius="8dp"
+        android:elevation="8dp" />
+
+</androidx.coordinatorlayout.widget.CoordinatorLayout> 

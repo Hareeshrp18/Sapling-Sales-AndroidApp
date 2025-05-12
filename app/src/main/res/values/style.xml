@@ -1,0 +1,7 @@
+ <resources>
+    <style name="PopupMenuStyle" parent="Widget.MaterialComponents.PopupMenu">
+        <item name="android:popupBackground">@drawable/menu_bg</item>
+        <item name="android:textColor">@color/forestGreen</item>
+        <item name="android:padding">8dp</item>
+    </style>
+</resources>

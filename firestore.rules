@@ -1,0 +1,32 @@
+rules_version = '2';
+service cloud.firestore {
+  match /databases/{database}/documents {
+    // SaplingProducts collection - allow read and write
+    match /saplingProducts/{productId} {
+      allow read: if true;
+      allow write: if true;
+    }
+    
+    // Users collection - allow read and write
+    match /users/{userId} {
+      allow read, write: if true;
+    }
+    
+    // SaplingOrders collection - allow read and write
+    match /saplingOrders/{orderId} {
+      allow read: if true;
+      allow write: if true;
+    }
+    
+    // SaplingAdmin collection - allow read and write
+    match /saplingAdmin/{adminId} {
+      allow read: if true;
+      allow write: if true;
+    }
+    
+    // Feedback collection - allow users to read and write their own feedback
+    match /feedback/{feedbackId} {
+      allow read, write: if true;
+    }
+  }
+} 

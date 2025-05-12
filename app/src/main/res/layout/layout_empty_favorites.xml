@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:gravity="center"
+    android:orientation="vertical"
+    android:padding="16dp">
+
+    <ImageView
+        android:id="@+id/ivEmptyFavorites"
+        android:layout_width="200dp"
+        android:layout_height="200dp"
+        android:contentDescription="@string/empty_favorites"
+        android:src="@drawable/ic_empty_favorites"
+        android:alpha="0.7" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="24dp"
+        android:text="@string/your_favorites_is_empty"
+        android:textSize="20sp"
+        android:textStyle="bold" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        android:text="@string/add_items_to_favorites"
+        android:textAlignment="center"
+        android:textColor="?android:textColorSecondary"
+        android:textSize="16sp" />
+
+    <com.google.android.material.button.MaterialButton
+        android:id="@+id/btnContinueShopping"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="24dp"
+        android:paddingHorizontal="32dp"
+        android:text="@string/continue_shopping"
+        app:cornerRadius="24dp" />
+
+</LinearLayout> 

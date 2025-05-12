@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <ImageView
+        android:id="@+id/productImage"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:scaleType="centerCrop"
+        android:contentDescription="Product Image" />
+
+    <ImageButton
+        android:id="@+id/btnRemoveImage"
+        android:layout_width="32dp"
+        android:layout_height="32dp"
+        android:layout_gravity="top|end"
+        android:layout_margin="8dp"
+        android:background="@drawable/circle_background"
+        android:src="@drawable/ic_close"
+        android:contentDescription="Remove Image"
+        app:tint="@android:color/white" />
+
+    <ImageButton
+        android:id="@+id/btnAddImage"
+        android:layout_width="48dp"
+        android:layout_height="48dp"
+        android:layout_gravity="center"
+        android:background="@drawable/circle_background"
+        android:src="@drawable/ic_add"
+        android:contentDescription="Add Image"
+        app:tint="@android:color/white"
+        android:visibility="gone" />
+
+</FrameLayout> 

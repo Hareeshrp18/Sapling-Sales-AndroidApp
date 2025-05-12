@@ -1,0 +1,26 @@
+rules_version = '2';
+service cloud.firestore {
+  match /databases/{database}/documents {
+    // Allow users to read and write their own orders
+    match /saplingOrders/{orderId} {
+      allow read, write: if request.auth != null && request.auth.uid == resource.data.userId;
+    }
+    
+    // Allow users to read products and submit ratings
+    match /saplingProducts/{productId} {
+      allow read: if true;
+      allow update: if request.auth != null && 
+        request.resource.data.diff(resource.data).affectedKeys().hasOnly(['ratings', 'averageRating', 'totalRatings']);
+    }
+    
+    // Allow users to manage their own cart
+    match /cart/{cartId} {
+      allow read, write: if request.auth != null && request.auth.uid == resource.data.userId;
+    }
+    
+    // Allow users to read and write their own user profile
+    match /users/{userId} {
+      allow read, write: if request.auth != null && request.auth.uid == userId;
+    }
+  }
+} 

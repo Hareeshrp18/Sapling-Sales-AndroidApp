@@ -1,0 +1,15 @@
+<resources>
+    <string name="app_name">SaplingSales</string>
+    <string name="username_placeholder">Loading...</string>
+    <string name="email_placeholder"></string>
+    <string name="mobile_placeholder"></string>
+    <string name="address_placeholder"></string>
+    <string name="edit_profile">Edit Profile</string>
+    <string name="empty_cart">Empty Cart</string>
+    <string name="your_cart_is_empty">Your cart is empty</string>
+    <string name="add_items_to_cart">Add items to your cart to see them here</string>
+    <string name="continue_shopping">Continue Shopping</string>
+    <string name="empty_favorites">Empty favorites</string>
+    <string name="your_favorites_is_empty">No Favorites Yet</string>
+    <string name="add_items_to_favorites">Add items to your favorites to see them here</string>
+</resources>

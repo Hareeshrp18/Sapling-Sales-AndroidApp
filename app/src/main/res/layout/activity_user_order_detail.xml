@@ -1,0 +1,239 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#FFFFFF">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
+
+        <!-- Toolbar -->
+        <RelativeLayout
+            android:id="@+id/toolbarLayout"
+            android:layout_width="match_parent"
+            android:layout_height="?attr/actionBarSize"
+            android:background="#FFFFFF"
+            android:elevation="4dp"
+            android:paddingHorizontal="16dp">
+
+            <ImageButton
+                android:id="@+id/btnBack"
+                android:layout_width="48dp"
+                android:layout_height="48dp"
+                android:layout_alignParentStart="true"
+                android:layout_centerVertical="true"
+                android:background="?attr/selectableItemBackgroundBorderless"
+                android:src="@drawable/ic_back"
+                android:contentDescription="Back"
+                android:padding="12dp"
+                app:tint="#333333"/>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerInParent="true"
+                android:text="Order Details"
+                android:textColor="#333333"
+                android:textSize="20sp"
+                android:fontFamily="sans-serif-medium"/>
+        </RelativeLayout>
+
+        <!-- Content -->
+        <ScrollView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:scrollbars="none"
+            android:background="#F5F5F5">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:padding="16dp">
+
+                <!-- Order Items RecyclerView in Card -->
+                <androidx.cardview.widget.CardView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    app:cardCornerRadius="16dp"
+                    app:cardBackgroundColor="#FFFFFF"
+                    app:cardElevation="2dp"
+                    app:cardUseCompatPadding="true">
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="vertical"
+                        android:padding="16dp">
+
+                        <androidx.recyclerview.widget.RecyclerView
+                            android:id="@+id/rvOrderItems"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:nestedScrollingEnabled="false"
+                            android:clipToPadding="false"/>
+
+                    </LinearLayout>
+                </androidx.cardview.widget.CardView>
+
+                <!-- Order Details Card -->
+                <androidx.cardview.widget.CardView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="8dp"
+                    app:cardCornerRadius="16dp"
+                    app:cardBackgroundColor="#FFFFFF"
+                    app:cardElevation="2dp"
+                    app:cardUseCompatPadding="true">
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="vertical"
+                        android:padding="20dp">
+
+                        <!-- Order ID with Label -->
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:orientation="vertical">
+                            
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text="Order ID"
+                                android:textColor="#666666"
+                                android:textSize="14sp"
+                                android:fontFamily="sans-serif-medium"/>
+
+                            <TextView
+                                android:id="@+id/tvOrderId"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:layout_marginTop="4dp"
+                                android:textColor="#333333"
+                                android:textSize="15sp"
+                                android:fontFamily="monospace"/>
+                        </LinearLayout>
+
+                        <!-- Order Date with Label -->
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:orientation="vertical"
+                            android:layout_marginTop="16dp">
+                            
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text="Order Date"
+                                android:textColor="#666666"
+                                android:textSize="14sp"
+                                android:fontFamily="sans-serif-medium"/>
+
+                            <TextView
+                                android:id="@+id/tvOrderDate"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:layout_marginTop="4dp"
+                                android:textColor="#333333"
+                                android:textSize="15sp"/>
+                        </LinearLayout>
+
+                        <!-- Status with Label -->
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:orientation="vertical"
+                            android:layout_marginTop="16dp">
+                            
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text="Status"
+                                android:textColor="#666666"
+                                android:textSize="14sp"
+                                android:fontFamily="sans-serif-medium"/>
+
+                            <TextView
+                                android:id="@+id/tvStatus"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_marginTop="4dp"
+                                android:background="@drawable/status_background"
+                                android:paddingHorizontal="12dp"
+                                android:paddingVertical="4dp"
+                                android:textColor="#FFFFFF"
+                                android:textSize="14sp"/>
+                        </LinearLayout>
+
+                        <!-- Total Amount with Label -->
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:orientation="vertical"
+                            android:layout_marginTop="16dp">
+                            
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text="Total Amount"
+                                android:textColor="#666666"
+                                android:textSize="14sp"
+                                android:fontFamily="sans-serif-medium"/>
+
+                            <TextView
+                                android:id="@+id/tvTotalAmount"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:layout_marginTop="4dp"
+                                android:textColor="@color/green"
+                                android:textSize="20sp"
+                                android:textStyle="bold"/>
+                        </LinearLayout>
+
+                        <!-- Shipping Address Section -->
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:orientation="vertical"
+                            android:layout_marginTop="16dp">
+                            
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text="Shipping Address"
+                                android:textColor="#666666"
+                                android:textSize="14sp"
+                                android:fontFamily="sans-serif-medium"/>
+
+                            <TextView
+                                android:id="@+id/tvShippingAddress"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:layout_marginTop="4dp"
+                                android:textColor="#333333"
+                                android:textSize="15sp"
+                                android:lineSpacingExtra="4dp"/>
+                        </LinearLayout>
+                    </LinearLayout>
+                </androidx.cardview.widget.CardView>
+            </LinearLayout>
+        </ScrollView>
+
+    </LinearLayout>
+
+    <ProgressBar
+        android:id="@+id/progressBar"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:visibility="gone"/>
+
+</androidx.constraintlayout.widget.ConstraintLayout> 

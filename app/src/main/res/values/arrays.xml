@@ -1,0 +1,7 @@
+<resources>
+    <string-array name="product_sort_options">
+        <item>Sort by Category</item>
+        <item>Sort by Price: Low to High</item>
+        <item>Sort by Price: High to Low</item>
+    </string-array>
+</resources> 

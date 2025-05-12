@@ -1,0 +1,15 @@
+<menu xmlns:tools="http://schemas.android.com/tools"
+    xmlns:android="http://schemas.android.com/apk/res/android">
+    <item
+        android:id="@+id/action_edit_profile"
+        android:title="Edit Profile"
+        android:showAsAction="never"
+        tools:ignore="AppCompatResource" />
+
+    <item
+        android:id="@+id/action_logout"
+        android:title="Logout"
+        android:showAsAction="never"
+        tools:ignore="AppCompatResource" />
+
+</menu>

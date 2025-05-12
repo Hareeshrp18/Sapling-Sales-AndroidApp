@@ -1,0 +1,85 @@
+<?xml version="1.0" encoding="utf-8"?>
+<com.google.android.material.card.MaterialCardView
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_margin="8dp"
+    android:foreground="?attr/selectableItemBackground"
+    android:clickable="true"
+    android:focusable="true"
+    app:cardCornerRadius="12dp"
+    app:cardElevation="4dp"
+    app:cardBackgroundColor="#1F1F1F">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+
+        <!-- Image Container -->
+        <FrameLayout
+            android:layout_width="match_parent"
+            android:layout_height="180dp">
+
+            <ImageView
+                android:id="@+id/ivProductImage"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:scaleType="centerCrop"
+                android:contentDescription="Product Image" />
+
+            <!-- Favorite Button -->
+            <ImageView
+                android:id="@+id/btnFavorite"
+                android:layout_width="32dp"
+                android:layout_height="32dp"
+                android:layout_gravity="end|top"
+                android:layout_margin="8dp"
+                android:background="?attr/selectableItemBackgroundBorderless"
+                android:src="@drawable/ic_favorite_border"
+                android:contentDescription="Add to favorites"
+                app:tint="@color/white" />
+        </FrameLayout>
+
+        <!-- Product Details Container -->
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:padding="12dp">
+
+            <!-- Product Name -->
+            <TextView
+                android:id="@+id/tvProductName"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textSize="16sp"
+                android:textColor="#4CAF50"
+                android:maxLines="2"
+                android:ellipsize="end" />
+
+            <!-- Price -->
+            <TextView
+                android:id="@+id/tvProductPrice"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="4dp"
+                android:textSize="14sp"
+                android:textColor="#4CAF50" />
+
+            <!-- Add to Cart Button -->
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/btnAddToCart"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="8dp"
+                android:text="Add to Cart"
+                android:textAllCaps="false"
+                android:backgroundTint="#E6E6FA"
+                android:textColor="#000000"
+                app:cornerRadius="8dp"
+                style="@style/Widget.MaterialComponents.Button" />
+        </LinearLayout>
+    </LinearLayout>
+</com.google.android.material.card.MaterialCardView> 

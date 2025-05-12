@@ -1,0 +1,190 @@
+<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    package="com.example.saplingsales">
+
+    <!-- Required Permissions -->
+    <uses-permission android:name="android.permission.INTERNET"/>
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE"/>
+    <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
+    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
+    <uses-permission android:name="android.permission.CAMERA" />
+    <uses-permission android:name="android.permission.RECORD_AUDIO" />
+    <uses-feature android:name="android.hardware.camera" android:required="false" />
+
+    <!-- Storage Permissions -->
+    <!-- For Android 13+ -->
+    <uses-permission android:name="android.permission.READ_MEDIA_IMAGES" />
+    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" android:maxSdkVersion="32" tools:ignore="ScopedStorage"/>
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+
+    <application
+        android:allowBackup="true"
+        android:dataExtractionRules="@xml/data_extraction_rules"
+        android:fullBackupContent="@xml/backup_rules"
+        android:icon="@mipmap/ic_spalinglogo"
+        android:label="@string/app_name"
+        android:roundIcon="@mipmap/ic_spalinglogo"
+        android:supportsRtl="true"
+        android:theme="@style/Theme.SaplingSales"
+        tools:targetApi="31">
+
+        <!-- Splash Screen -->
+        <activity
+            android:name=".SplashActivity"
+            android:exported="true"
+            android:theme="@style/Theme.AppCompat.Light.NoActionBar">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+
+        <!-- Role Selection -->
+        <activity
+            android:name=".RoleSelectionActivity"
+            android:exported="true"
+            android:theme="@style/Theme.SaplingSales">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+
+        <!-- Authentication -->
+        <activity
+            android:name=".UserSignupActivity"
+            android:exported="true"
+            android:theme="@style/Theme.SaplingSales" />
+        <activity
+            android:name=".UserLoginActivity"
+            android:exported="true"
+            android:theme="@style/Theme.SaplingSales" />
+
+        <!-- User-related Activities -->
+        <activity
+            android:name=".MainActivity"
+            android:theme="@style/Theme.SaplingSales" />
+        <activity
+            android:name=".UserHomeActivity"
+            android:theme="@style/Theme.SaplingSales" />
+        <activity
+            android:name=".activities.UserScreenActivity"
+            android:exported="true"
+            android:theme="@style/Theme.SaplingSales" />
+        <activity
+            android:name=".UserProfileActivity"
+            android:theme="@style/Theme.SaplingSales" />
+        <activity
+            android:name=".EditProfileActivity"
+            android:theme="@style/Theme.SaplingSales" />
+        <activity
+            android:name=".InfoActivity"
+            android:theme="@style/Theme.SaplingSales" />
+        <activity
+            android:name=".activities.CartActivity"
+            android:label="Cart"
+            android:theme="@style/Theme.SaplingSales"
+            android:exported="false" />
+        <activity
+            android:name=".activities.FavoritesActivity"
+            android:label="Favorites"
+            android:theme="@style/Theme.SaplingSales"
+            android:exported="false" />
+        <activity
+            android:name=".OrderHistoryActivity"
+            android:theme="@style/Theme.SaplingSales" />
+        <activity
+            android:name=".activities.UserOrdersActivity"
+            android:exported="false"
+            android:theme="@style/Theme.SaplingSales" />
+        <activity
+            android:name=".activities.UserOrderDetailActivity"
+            android:exported="false"
+            android:theme="@style/Theme.SaplingSales" />
+
+        <!-- Admin-related Activities -->
+        <activity
+            android:name=".AdminLoginActivity"
+            android:exported="true"
+            android:theme="@style/Theme.SaplingSales" />
+        <activity
+            android:name=".AdminSignupActivity"
+            android:theme="@style/Theme.SaplingSales" />
+        <activity
+            android:name=".AdminDashboardActivity"
+            android:exported="false"
+            android:theme="@style/Theme.SaplingSales" />
+        <activity
+            android:name=".AdminEditProfileActivity"
+            android:exported="false" />
+        <activity
+            android:name=".AdminProfileActivity"
+            android:exported="false"
+            android:theme="@style/Theme.SaplingSales" />
+        <activity
+            android:name=".AdminAddproductActivity"
+            android:exported="false"
+            android:theme="@style/Theme.SaplingSales" />
+        <activity
+            android:name=".ManageUserActivity"
+            android:exported="false"
+            android:theme="@style/Theme.SaplingSales" />
+        <activity
+            android:name=".activities.UserViewProductActivity"
+            android:exported="true"
+            android:theme="@style/Theme.SaplingSales" />
+        <activity
+            android:name=".UserOrderActivity"
+            android:exported="false"
+            android:theme="@style/Theme.SaplingSales" />
+        <activity
+            android:name=".activities.AdminViewProductActivity"
+            android:exported="false" />
+        <activity
+            android:name=".EditProductActivity"
+            android:exported="false"
+            android:theme="@style/Theme.SaplingSales" />
+        <activity
+            android:name=".CashfreePaymentActivity"
+            android:theme="@style/Theme.SaplingSales" />
+        
+        <activity
+            android:name=".FeedbackActivity"
+            android:exported="false"
+            android:theme="@style/Theme.SaplingSales"
+            android:windowSoftInputMode="adjustResize" />
+        
+        <activity
+            android:name=".AdminOrdersActivity"
+            android:exported="false"
+            android:theme="@style/Theme.SaplingSales" />
+        
+        <activity
+            android:name=".AdminFeedbackActivity"
+            android:exported="false"
+            android:theme="@style/Theme.SaplingSales" />
+        
+        <activity
+            android:name=".AdminFeedbackChatActivity"
+            android:exported="false"
+            android:theme="@style/Theme.SaplingSales" />
+        
+        <activity
+            android:name=".activities.FullScreenImageActivity"
+            android:exported="false" />
+        
+        <activity
+            android:name=".AdminOrderDetailActivity" />
+        
+        <provider
+            android:name="androidx.core.content.FileProvider"
+            android:authorities="${applicationId}.fileprovider"
+            android:exported="false"
+            android:grantUriPermissions="true">
+            <meta-data
+                android:name="android.support.FILE_PROVIDER_PATHS"
+                android:resource="@xml/file_paths" />
+        </provider>
+    </application>
+</manifest>
