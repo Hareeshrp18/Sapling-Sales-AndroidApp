@@ -36,7 +36,6 @@ class UserHomeActivity : AppCompatActivity() {
         auth = FirebaseAuth.getInstance()
         firestore = FirebaseFirestore.getInstance()
 
-        // Initialize UI elements
         btnBack = findViewById(R.id.btnBack)
         btnMenu = findViewById(R.id.btnMenu)
         tvWelcome = findViewById(R.id.tvWelcome)

@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@drawable/gradient_background"
+    android:background="@drawable/bg_edit_text"
     tools:context=".UserLoginActivity">
 
     <LinearLayout
@@ -71,7 +71,7 @@
             app:boxCornerRadiusBottomEnd="16dp"
             app:hintTextColor="@color/forestGreen"
             app:passwordToggleEnabled="true"
-            app:passwordToggleTint="@color/forestGreen"
+            app:passwordToggleTint="@color/black"
             android:hint="Password">
             <com.google.android.material.textfield.TextInputEditText
                 android:id="@+id/etPassword"

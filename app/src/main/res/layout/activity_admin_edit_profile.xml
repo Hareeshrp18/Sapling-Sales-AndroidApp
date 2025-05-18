@@ -61,39 +61,59 @@
                 app:cornerRadius="20dp"
                 android:paddingStart="24dp"
                 android:paddingEnd="24dp"/>
+        <com.google.android.material.card.MaterialCardView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="24dp"
+            android:padding="20dp"
+            app:cardBackgroundColor="#1A1A1A"
+            app:cardCornerRadius="16dp"
+            app:cardElevation="4dp"
+            app:strokeColor="#EFE7E7"
+            app:strokeWidth="1dp">
 
-            <com.google.android.material.textfield.TextInputLayout
+            <LinearLayout
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="24dp"
-                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
-                app:boxStrokeColor="@color/forestGreen"
-                app:hintTextColor="@color/forestGreen">
+                android:layout_height="214dp"
+                android:background="@color/background_light"
+                android:orientation="vertical"
+                android:padding="16dp">
 
-                <com.google.android.material.textfield.TextInputEditText
-                    android:id="@+id/etAdminName"
+                <com.google.android.material.textfield.TextInputLayout
+                    style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:hint="Admin Name"
-                    android:inputType="textPersonName"/>
-            </com.google.android.material.textfield.TextInputLayout>
+                    android:layout_marginTop="24dp"
+                    app:boxStrokeColor="@color/forestGreen"
+                    app:hintTextColor="@color/forestGreen">
 
-            <com.google.android.material.textfield.TextInputLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="16dp"
-                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
-                app:boxStrokeColor="@color/forestGreen"
-                app:hintTextColor="@color/forestGreen">
+                    <com.google.android.material.textfield.TextInputEditText
+                        android:id="@+id/etAdminName"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:hint="Admin Name"
+                        android:textColorHint="@color/green_light"
+                        android:inputType="textPersonName" />
+                </com.google.android.material.textfield.TextInputLayout>
 
-                <com.google.android.material.textfield.TextInputEditText
-                    android:id="@+id/etStoreName"
+                <com.google.android.material.textfield.TextInputLayout
+                    style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:hint="Store Name"
-                    android:inputType="text"/>
-            </com.google.android.material.textfield.TextInputLayout>
+                    android:layout_marginTop="16dp"
+                    app:boxStrokeColor="@color/forestGreen"
+                    app:hintTextColor="@color/forestGreen">
 
+                    <com.google.android.material.textfield.TextInputEditText
+                        android:id="@+id/etStoreName"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:hint="Store Name"
+                        android:textColorHint="@color/green_light"
+                        android:inputType="text" />
+                </com.google.android.material.textfield.TextInputLayout>
+            </LinearLayout>
+        </com.google.android.material.card.MaterialCardView>
             <com.google.android.material.button.MaterialButton
                 android:id="@+id/btnSave"
                 android:layout_width="match_parent"
@@ -102,7 +122,7 @@
                 android:text="Save Changes"
                 android:textColor="@color/white"
                 android:padding="12dp"
-                android:backgroundTint="@color/forestGreen"
+                android:backgroundTint="@color/colorPrimary"
                 app:cornerRadius="8dp"/>
 
             <ProgressBar

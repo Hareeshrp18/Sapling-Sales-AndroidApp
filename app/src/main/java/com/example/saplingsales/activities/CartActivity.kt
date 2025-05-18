@@ -28,6 +28,16 @@ import android.app.Dialog
 import android.view.Window
 import android.view.WindowManager
 import android.widget.Button
+import android.Manifest
+import android.telephony.SmsManager
+import android.content.pm.PackageManager
+import androidx.core.app.ActivityCompat
+import androidx.core.content.ContextCompat
+import android.content.Intent
+import android.net.Uri
+import android.webkit.WebView
+import android.widget.MediaController
+import android.widget.VideoView
 
 class CartActivity : AppCompatActivity(), PaymentResultListener {
     private lateinit var toolbar: Toolbar
@@ -46,14 +56,15 @@ class CartActivity : AppCompatActivity(), PaymentResultListener {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_cart)
-        
-        // Initialize Razorpay Checkout
+
         Checkout.preload(applicationContext)
-        
+
         initializeViews()
         setupViews()
         loadCartItems()
+
     }
+
 
     private fun initializeViews() {
         toolbar = findViewById(R.id.toolbar)
@@ -62,6 +73,7 @@ class CartActivity : AppCompatActivity(), PaymentResultListener {
         totalAmountText = findViewById(R.id.totalAmount)
         checkoutButton = findViewById(R.id.checkoutButton)
         progressBar = findViewById(R.id.progressBar)
+
     }
 
     private fun setupViews() {
@@ -107,11 +119,39 @@ class CartActivity : AppCompatActivity(), PaymentResultListener {
             .whereEqualTo("userId", userId)
             .get()
             .addOnSuccessListener { documents ->
-                Log.d(TAG, "Found ${documents.size()} cart items")
+                Log.d(TAG, "Found "+documents.size()+" cart items")
                 if (documents.isEmpty) {
                     Log.d(TAG, "Cart is empty")
-                    updateUI()
-                    progressBar.visibility = View.GONE
+                    // Show the empty cart layout
+                    setContentView(R.layout.layout_empty_cart)
+
+                    // Setup the empty cart video
+                    val videoView = findViewById<VideoView>(R.id.videoView)
+                    val videoUri = Uri.parse("android.resource://${packageName}/${R.raw.empty_cart}")
+                    videoView.setVideoURI(videoUri)
+
+//                    val mediaController = MediaController(this)
+//                    mediaController.setAnchorView(videoView)
+//                    videoView.setMediaController(mediaController)
+
+                    videoView.setOnPreparedListener { mediaPlayer ->
+                        mediaPlayer.isLooping = true // optional: loop the video
+                    }
+
+                    videoView.start()
+
+                    val btnContinueShopping = findViewById<com.google.android.material.button.MaterialButton>(R.id.btnContinueShopping)
+                    btnContinueShopping.setOnClickListener {
+                        val intent = Intent(this, com.example.saplingsales.activities.UserScreenActivity::class.java)
+                        intent.flags = Intent.FLAG_ACTIVITY_CLEAR_TOP or Intent.FLAG_ACTIVITY_NEW_TASK
+                        startActivity(intent)
+                        finish()
+                    }
+                    // Handle back icon in toolbar
+                    val toolbar = findViewById<com.google.android.material.appbar.MaterialToolbar>(R.id.toolbarEmptyCart)
+                    toolbar.setNavigationOnClickListener {
+                        onBackPressed()
+                    }
                     return@addOnSuccessListener
                 }
 
@@ -435,95 +475,150 @@ class CartActivity : AppCompatActivity(), PaymentResultListener {
                     val userEmail = userDoc.getString("email") ?: ""
                     val userPhone = userDoc.getString("phone") ?: ""
                     val userAddress = userDoc.getString("address") ?: ""
+
+                    // Create a batch operation for better handling of multiple products
+                    val batch = firestore.batch()
                     
-                    // Now proceed with order creation transaction
-                    firestore.runTransaction { transaction ->
-                        var canProceed = true
-                        val productUpdates = mutableMapOf<String, Int>()
+                    // First check all product availability
+                    val productChecks = cartItems.map { cartItem ->
+                        firestore.collection("saplingProducts").document(cartItem.productId).get()
+                    }
 
-                        // First check product availability
-                        cartItems.forEach { cartItem ->
-                            val productRef = firestore.collection("saplingProducts").document(cartItem.productId)
-                            val productDoc = transaction.get(productRef)
-                            
+                    // Wait for all product checks to complete
+                    val allChecks = mutableListOf<Boolean>()
+                    var checkCount = 0
+
+                    productChecks.forEach { task ->
+                        task.addOnSuccessListener { productDoc ->
+                            val cartItem = cartItems[checkCount]
                             if (!productDoc.exists()) {
-                                canProceed = false
-                                return@forEach
-                            }
-                            
-                            val availableQuantity = productDoc.getLong("quantity")?.toInt() ?: 0
-                            if (availableQuantity < cartItem.quantity) {
-                                canProceed = false
-                                return@forEach
-                            }
-                            
-                            productUpdates[cartItem.productId] = availableQuantity - cartItem.quantity
-                        }
-
-                        if (canProceed) {
-                            // Create order document with user information
-                            val orderRef = firestore.collection("saplingOrders").document(orderId)
-                            val orderData = hashMapOf(
-                                "userId" to userId,
-                                "orderId" to orderId,
-                                "paymentId" to paymentId,
-                                "totalAmount" to totalAmount,
-                                "status" to "confirmed",
-                                "createdAt" to System.currentTimeMillis(),
-                                // Include user information
-                                "customerName" to userName,
-                                "customerEmail" to userEmail,
-                                "customerPhone" to userPhone,
-                                "shippingAddress" to userAddress,
-                                "items" to cartItems.map { cartItem ->
-                                    // Get product details to ensure we have the latest image data
+                                allChecks.add(false)
+                            } else {
+                                val currentQuantity = productDoc.getLong("quantity") ?: 0
+                                if (currentQuantity < cartItem.quantity) {
+                                    allChecks.add(false)
+                                } else {
+                                    // Update product quantity
                                     val productRef = firestore.collection("saplingProducts").document(cartItem.productId)
-                                    val productDoc = transaction.get(productRef)
-                                    
-                                    hashMapOf(
-                                        "productId" to cartItem.productId,
-                                        "quantity" to cartItem.quantity,
-                                        "price" to cartItem.price,
-                                        "productName" to cartItem.productName,
-                                        "productImage" to (productDoc.getString("imageBase64") ?: cartItem.productImage),
-                                        "productImageUrl" to (productDoc.get("imageUrls")?.let { urls ->
-                                            when (urls) {
-                                                is List<*> -> urls.firstOrNull()?.toString()
-                                                else -> null
-                                            }
-                                        } ?: cartItem.productImageUrl),
-                                        "productCategory" to cartItem.productCategory
-                                    )
+                                    batch.update(productRef, "quantity", currentQuantity - cartItem.quantity)
+                                    allChecks.add(true)
                                 }
-                            )
-                            transaction.set(orderRef, orderData)
-
-                            // Update product quantities
-                            productUpdates.forEach { (productId, newQuantity) ->
-                                val productRef = firestore.collection("saplingProducts").document(productId)
-                                transaction.update(productRef, "quantity", newQuantity)
                             }
+                            checkCount++
 
-                            // Delete cart items
-                            cartItems.forEach { cartItem ->
-                                val cartRef = firestore.collection("cartProduct").document(cartItem.id)
-                                transaction.delete(cartRef)
+                            // When all checks are complete
+                            if (checkCount == cartItems.size) {
+                                if (allChecks.all { it }) {
+                                    // All products are available, proceed with order creation
+                                    val orderRef = firestore.collection("saplingOrders").document(orderId)
+                                    val orderData = hashMapOf(
+                                        "userId" to userId,
+                                        "orderId" to orderId,
+                                        "paymentId" to paymentId,
+                                        "totalAmount" to totalAmount,
+                                        "status" to "confirmed",
+                                        "createdAt" to System.currentTimeMillis(),
+                                        "customerName" to userName,
+                                        "customerEmail" to userEmail,
+                                        "customerPhone" to userPhone,
+                                        "shippingAddress" to userAddress,
+                                        "items" to cartItems.map { item ->
+                                            hashMapOf(
+                                                "productId" to item.productId,
+                                                "productName" to item.productName,
+                                                "quantity" to item.quantity,
+                                                "price" to item.price,
+                                                "productImage" to item.productImage,
+                                                "productImageUrl" to item.productImageUrl,
+                                                "productCategory" to item.productCategory
+                                            )
+                                        }
+                                    )
+
+                                    batch.set(orderRef, orderData)
+
+                                    // Delete cart items
+                                    cartItems.forEach { cartItem ->
+                                        val cartRef = firestore.collection("cartProduct").document(cartItem.id)
+                                        batch.delete(cartRef)
+                                    }
+
+                                    // Commit the batch
+                                    batch.commit()
+                                        .addOnSuccessListener {
+                                            Log.d(TAG, "Order created successfully")
+                                            Toast.makeText(this, "Order placed successfully!", Toast.LENGTH_LONG).show()
+                                            
+                                            // Send SMS notification
+                                            if (ContextCompat.checkSelfPermission(this, Manifest.permission.SEND_SMS) 
+                                                == PackageManager.PERMISSION_GRANTED) {
+                                                try {
+                                                    val smsManager = if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.S) {
+                                                        this.getSystemService(SmsManager::class.java)
+                                                    } else {
+                                                        @Suppress("DEPRECATION")
+                                                        SmsManager.getDefault()
+                                                    }
+
+                                                    val formattedPhone = userPhone.trim().let {
+                                                        if (it.startsWith("+91")) it else "+91$it"
+                                                    }.replace(" ", "")
+
+                                                    val productDetails = cartItems.joinToString("\n") { item ->
+                                                        "${item.productName} (Qty: ${item.quantity}) - ₹${item.price * item.quantity}"
+                                                    }
+
+                                                    val message = """Dear $userName,
+                                                        |
+                                                        |Thank you for your order #$orderId!
+                                                        |
+                                                        |Order Details:
+                                                        |$productDetails
+                                                        |
+                                                        |Total Amount: ₹$totalAmount
+                                                        |
+                                                        |Thank you for shopping with Sapling Sales!""".trimMargin()
+
+                                                    // Split message if it's too long
+                                                    val messageParts = smsManager.divideMessage(message)
+                                                    smsManager.sendMultipartTextMessage(
+                                                        formattedPhone,
+                                                        null,
+                                                        messageParts,
+                                                        null,
+                                                        null
+                                                    )
+                                                    Log.d(TAG, "SMS sent successfully to $formattedPhone")
+                                                } catch (e: Exception) {
+                                                    Log.e(TAG, "Failed to send SMS: ${e.message}")
+                                                }
+                                            } else {
+                                                Log.e(TAG, "SMS permission not granted")
+                                            }
+
+                                            cartItems.clear()
+                                            cartAdapter.submitList(emptyList())
+                                            updateUI()
+                                            progressBar.visibility = View.GONE
+                                            finish()
+                                        }
+                                        .addOnFailureListener { e ->
+                                            Log.e(TAG, "Batch operation failed: ${e.message}")
+                                            showError("Failed to process order: ${e.message}")
+                                            progressBar.visibility = View.GONE
+                                        }
+                                } else {
+                                    // Some products are not available
+                                    showError("Some products are not available in the requested quantity")
+                                    progressBar.visibility = View.GONE
+                                }
                             }
                         }
-                        
-                        canProceed
-                    }.addOnSuccessListener {
-                        Log.d(TAG, "Order created successfully")
-                        Toast.makeText(this, "Order placed successfully!", Toast.LENGTH_LONG).show()
-                        cartItems.clear()
-                        cartAdapter.submitList(emptyList())
-                        updateUI()
-                        progressBar.visibility = View.GONE
-                        finish()
-                    }.addOnFailureListener { e ->
-                        Log.e(TAG, "Transaction failed: ${e.message}")
-                        showError("Failed to process order: ${e.message}")
-                        progressBar.visibility = View.GONE
+                        .addOnFailureListener { e ->
+                            Log.e(TAG, "Error checking product availability: ${e.message}")
+                            showError("Error checking product availability")
+                            progressBar.visibility = View.GONE
+                        }
                     }
                 }
                 .addOnFailureListener { e ->
@@ -544,6 +639,7 @@ class CartActivity : AppCompatActivity(), PaymentResultListener {
             recyclerView.visibility = View.GONE
             emptyView.visibility = View.VISIBLE
             checkoutButton.isEnabled = false
+
         } else {
             recyclerView.visibility = View.VISIBLE
             emptyView.visibility = View.GONE

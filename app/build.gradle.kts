@@ -65,6 +65,7 @@ dependencies {
     implementation("com.cashfree.pg:api:2.2.0")
 
     implementation("com.razorpay:checkout:1.6.33")
+    implementation(libs.androidx.gridlayout)
     // Testing Dependencies
     testImplementation(libs.junit)
     androidTestImplementation(libs.androidx.junit)

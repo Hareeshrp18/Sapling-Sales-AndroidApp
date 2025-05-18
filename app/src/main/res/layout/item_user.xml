@@ -6,12 +6,14 @@
     android:layout_margin="8dp"
     app:cardCornerRadius="8dp"
     app:cardElevation="2dp"
-    app:cardBackgroundColor="@android:color/white">
+    app:cardBackgroundColor="#F3F4EC">
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="vertical"
+        android:layout_margin="@dimen/cf_text_size_12"
+        android:foregroundTint="@color/secondaryColor"
         android:padding="16dp">
 
         <TextView
@@ -20,7 +22,7 @@
             android:layout_height="wrap_content"
             android:textSize="18sp"
             android:textStyle="bold"
-            android:textColor="@color/forestGreen"
+            android:textColor="#A26850"
             android:layout_marginBottom="8dp" />
 
         <LinearLayout
@@ -42,7 +44,7 @@
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:textSize="14sp"
-                android:textColor="@color/forestGreen"
+               android:textColor="#136207"
                 android:autoLink="email" />
         </LinearLayout>
 
@@ -65,7 +67,7 @@
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:textSize="14sp"
-                android:textColor="@color/forestGreen"
+                android:textColor="#136207"
                 android:autoLink="phone" />
         </LinearLayout>
 
@@ -87,7 +89,7 @@
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:textSize="14sp"
-                android:textColor="@color/forestGreen" />
+                android:textColor="#136207" />
         </LinearLayout>
     </LinearLayout>
 </com.google.android.material.card.MaterialCardView>
