@@ -104,9 +104,16 @@ class UserProfileActivity : AppCompatActivity() {
     }
 
     private fun setupToolbar() {
-        toolbar?.let {
-            setSupportActionBar(it)
-            supportActionBar?.setDisplayShowTitleEnabled(false)
+        try {
+            supportActionBar?.apply {
+                setDisplayHomeAsUpEnabled(true)
+                title = "Profile"
+            }
+            toolbar?.setNavigationOnClickListener {
+                finish()
+            }
+        } catch (e: Exception) {
+            Log.e(TAG, "Error setting up toolbar: ${e.message}", e)
         }
     }
 
@@ -242,6 +249,23 @@ class UserProfileActivity : AppCompatActivity() {
 
     private fun getLocation() {
         try {
+            if (ActivityCompat.checkSelfPermission(
+                    this,
+                    Manifest.permission.ACCESS_FINE_LOCATION
+                ) != PackageManager.PERMISSION_GRANTED && ActivityCompat.checkSelfPermission(
+                    this,
+                    Manifest.permission.ACCESS_COARSE_LOCATION
+                ) != PackageManager.PERMISSION_GRANTED
+            ) {
+                // TODO: Consider calling
+                //    ActivityCompat#requestPermissions
+                // here to request the missing permissions, and then overriding
+                //   public void onRequestPermissionsResult(int requestCode, String[] permissions,
+                //                                          int[] grantResults)
+                // to handle the case where the user grants the permission. See the documentation
+                // for ActivityCompat#requestPermissions for more details.
+                return
+            }
             fusedLocationClient.lastLocation
                 .addOnSuccessListener { location: Location? ->
                     if (location != null) {

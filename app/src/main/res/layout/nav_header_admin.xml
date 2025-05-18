@@ -13,6 +13,8 @@
         android:layout_width="80dp"
         android:layout_height="80dp"
         android:layout_marginBottom="8dp"
+        android:layout_gravity="center_horizontal"
+        android:scaleType="centerCrop"
         android:contentDescription="Admin Profile"
         android:src="@drawable/baseline_person_24" />
 
@@ -21,6 +23,8 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Admin Name"
+        android:layout_gravity="center_horizontal"
+        android:scaleType="centerCrop"
         android:textAppearance="@style/TextAppearance.AppCompat.Body1"
         android:textColor="#FFFFFF"
         android:textSize="16sp"
@@ -30,6 +34,8 @@
         android:id="@+id/tvStoreName"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_gravity="center_horizontal"
+        android:scaleType="centerCrop"
         android:text="Store Name"
         android:textColor="#FFFFFF"
         android:textSize="14sp" />

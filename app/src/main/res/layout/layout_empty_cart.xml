@@ -3,42 +3,69 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:gravity="center"
     android:orientation="vertical"
-    android:padding="16dp">
+    android:background="@color/white">
 
-    <ImageView
-        android:id="@+id/ivEmptyCart"
-        android:layout_width="200dp"
-        android:layout_height="200dp"
-        android:contentDescription="@string/empty_cart"
-        android:src="@drawable/ic_empty_cart"
-        android:alpha="0.7" />
-
-    <TextView
-        android:layout_width="wrap_content"
+    <com.google.android.material.appbar.MaterialToolbar
+        android:id="@+id/toolbarEmptyCart"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="24dp"
-        android:text="@string/your_cart_is_empty"
-        android:textSize="20sp"
-        android:textStyle="bold" />
+        android:background="@color/white"
+        app:navigationIcon="@drawable/ic_back"
+        app:title="Cart"
+        app:titleTextColor="@color/black" />
 
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="8dp"
-        android:text="@string/add_items_to_cart"
-        android:textAlignment="center"
-        android:textColor="?android:textColorSecondary"
-        android:textSize="16sp" />
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1"
+        android:gravity="center"
+        android:orientation="vertical"
+        android:padding="16dp">
 
-    <com.google.android.material.button.MaterialButton
-        android:id="@+id/btnContinueShopping"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="24dp"
-        android:paddingHorizontal="32dp"
-        android:text="@string/continue_shopping"
-        app:cornerRadius="24dp" />
+<!--        <ImageView-->
+<!--            android:id="@+id/ivEmptyCart"-->
+<!--            android:layout_width="200dp"-->
+<!--            android:layout_height="200dp"-->
+<!--            android:alpha="0.7"-->
+<!--            android:contentDescription="@string/empty_cart"-->
+<!--            app:tint="@color/bottom_nav_color"-->
+<!--            android:src="@drawable/ic_empty_cart" />-->
+        <VideoView
+            android:id="@+id/videoView"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_margin="16dp" />
+
+
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="24dp"
+            android:text="@string/your_cart_is_empty"
+            android:textColor="@color/black"
+            android:textSize="20sp"
+            android:textStyle="bold" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:text="@string/add_items_to_cart"
+            android:textAlignment="center"
+            android:textColor="@color/black"
+            android:textSize="16sp" />
+
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/btnContinueShopping"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="24dp"
+            android:paddingHorizontal="32dp"
+            android:text="@string/continue_shopping"
+            app:cornerRadius="24dp" />
+    </LinearLayout>
 
 </LinearLayout> 

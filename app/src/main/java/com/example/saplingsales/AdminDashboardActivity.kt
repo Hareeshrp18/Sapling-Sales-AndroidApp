@@ -95,7 +95,7 @@ class AdminDashboardActivity : AppCompatActivity(), NavigationView.OnNavigationI
 
     private fun setupNavigationDrawer() {
         navigationView.setNavigationItemSelectedListener(this)
-        
+
         // Setup menu button click with animation
         menuButton.setOnClickListener {
             if (drawerLayout.isDrawerOpen(GravityCompat.START)) {
@@ -167,39 +167,79 @@ class AdminDashboardActivity : AppCompatActivity(), NavigationView.OnNavigationI
 
     private fun updateAdminInfo(adminName: String, storeName: String) {
         try {
-            tvWelcomeAdmin.text = "Welcome, $adminName"
+            tvWelcomeAdmin.text = "Welcome,   $adminName  \n    $storeName"
             tvNavHeaderName.text = adminName
             tvStoreName.text = storeName
         } catch (e: Exception) {
             e.printStackTrace()
         }
     }
-
     private fun setupDashboardStats() {
         db.collection("saplingOrders").get().addOnSuccessListener { snapshot ->
             val now = Calendar.getInstance()
             val thisMonth = now.get(Calendar.MONTH)
             val thisYear = now.get(Calendar.YEAR)
+
+            // Calculate start/end of this month
+            val startOfThisMonth = Calendar.getInstance().apply {
+                set(Calendar.DAY_OF_MONTH, 1)
+                set(Calendar.HOUR_OF_DAY, 0)
+                set(Calendar.MINUTE, 0)
+                set(Calendar.SECOND, 0)
+                set(Calendar.MILLISECOND, 0)
+            }.timeInMillis
+            val startOfNextMonth = Calendar.getInstance().apply {
+                set(Calendar.DAY_OF_MONTH, 1)
+                set(Calendar.HOUR_OF_DAY, 0)
+                set(Calendar.MINUTE, 0)
+                set(Calendar.SECOND, 0)
+                set(Calendar.MILLISECOND, 0)
+                add(Calendar.MONTH, 1)
+            }.timeInMillis
+
+            // Calculate start/end of last month
+            val startOfLastMonth = Calendar.getInstance().apply {
+                set(Calendar.DAY_OF_MONTH, 1)
+                set(Calendar.HOUR_OF_DAY, 0)
+                set(Calendar.MINUTE, 0)
+                set(Calendar.SECOND, 0)
+                set(Calendar.MILLISECOND, 0)
+                add(Calendar.MONTH, -1)
+            }.timeInMillis
+            val endOfLastMonth = startOfThisMonth
+
             var sumThisMonth = 0.0
             var sumLastMonth = 0.0
             var total = 0.0
             val totalOrders = snapshot.documents.size
+
             snapshot.documents.forEach { doc ->
-                val createdAt = doc.getLong("createdAt") ?: return@forEach
-                val amount = doc.getDouble("totalAmount") ?: 0.0
-                val cal = Calendar.getInstance().apply { timeInMillis = createdAt }
-                val orderMonth = cal.get(Calendar.MONTH)
-                val orderYear = cal.get(Calendar.YEAR)
-                total += amount
-                if (orderYear == thisYear && orderMonth == thisMonth) sumThisMonth += amount
-                if (orderYear == thisYear && orderMonth == thisMonth - 1) sumLastMonth += amount
+                try {
+                    val amount = doc.getDouble("totalAmount") ?: 0.0
+                    total += amount
+
+                    val createdAt = doc.getTimestamp("createdAt")?.toDate()?.time
+                    if (createdAt != null) {
+                        if (createdAt >= startOfThisMonth && createdAt < startOfNextMonth) {
+                            sumThisMonth += amount
+                        } else if (createdAt >= startOfLastMonth && createdAt < endOfLastMonth) {
+                            sumLastMonth += amount
+                        }
+                    }
+                } catch (e: Exception) {
+                    Log.e("AdminDashboard", "Error processing order: ${e.message}")
+                }
             }
+
             tvTotalCollection.text = "Total Collection ₹%.2f".format(total)
-            tvTotalProductSales.text = "Total Product Saled $totalOrders"
+            tvTotalProductSales.text = "Total Products Sold: $totalOrders"
             val percentChange = if (sumLastMonth > 0) ((sumThisMonth - sumLastMonth) / sumLastMonth) * 100 else 0.0
             val comparisonText = "This Month: ₹%.2f\nLast Month: ₹%.2f\nChange: %.1f%%".format(sumThisMonth, sumLastMonth, percentChange)
             tvSalesComparison.text = comparisonText
-            tvSalesComparison.setTextColor(if (percentChange >= 0) getColor(R.color.forestGreen) else getColor(android.R.color.holo_red_dark))
+            tvSalesComparison.setTextColor(if (percentChange >= 0) getColor(R.color.admin_button_color) else getColor(android.R.color.holo_red_dark))
+        }.addOnFailureListener { e ->
+            Log.e("AdminDashboard", "Error loading orders: ${e.message}")
+            Toast.makeText(this, "Error loading dashboard stats", Toast.LENGTH_SHORT).show()
         }
     }
 

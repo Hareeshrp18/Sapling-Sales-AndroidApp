@@ -6,6 +6,15 @@
     android:orientation="vertical"
     android:background="@android:color/white">
 
+<!--    <androidx.appcompat.widget.Toolbar-->
+<!--        android:id="@+id/toolbar"-->
+<!--        android:layout_width="match_parent"-->
+<!--        android:layout_height="?attr/actionBarSize"-->
+<!--        android:backgroundTint="@color/background_light"-->
+<!--        android:elevation="4dp"-->
+<!--        app:title="@string/profile"-->
+<!--        app:navigationIcon="@drawable/ic_back"-->
+<!--        app:titleTextColor="@color/black" />-->
     <androidx.appcompat.widget.Toolbar
         android:id="@+id/toolbar"
         android:layout_width="match_parent"
@@ -15,18 +24,6 @@
         app:navigationIcon="@drawable/ic_back"
         app:title="Profile"
         app:titleTextColor="@color/black" />
-
-    <TextView
-        android:id="@+id/tvProfileTitle"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="Profile"
-        android:textSize="22sp"
-        android:textStyle="bold"
-        android:textColor="@android:color/black"
-        android:gravity="center"
-        android:paddingTop="8dp"
-        android:paddingBottom="8dp"/>
 
     <ScrollView
         android:layout_width="match_parent"
@@ -40,7 +37,6 @@
             android:orientation="vertical"
             android:padding="16dp">
 
-            <!-- Profile Image Section -->
             <androidx.cardview.widget.CardView
                 android:layout_width="120dp"
                 android:layout_height="120dp"
@@ -73,6 +69,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:orientation="vertical"
+                    android:background="@color/background_light"
                     android:padding="16dp">
 
                     <!-- Name Section -->
@@ -88,7 +85,7 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_marginTop="4dp"
-                        android:textColor="@android:color/white"
+                        android:textColor="@color/black"
                         android:textSize="16sp" />
 
                     <View
@@ -111,7 +108,7 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_marginTop="4dp"
-                        android:textColor="@android:color/white"
+                        android:textColor="@color/black"
                         android:textSize="16sp" />
 
                     <View
@@ -134,7 +131,7 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_marginTop="4dp"
-                        android:textColor="@android:color/white"
+                        android:textColor="@color/black"
                         android:textSize="16sp" />
 
                     <View
@@ -157,7 +154,7 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_marginTop="4dp"
-                        android:textColor="@android:color/white"
+                        android:textColor="@color/black"
                         android:textSize="16sp" />
 
                 </LinearLayout>
@@ -170,14 +167,14 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="24dp"
-                android:backgroundTint="#E6E0E9"
+                android:backgroundTint="#18971E"
                 android:padding="12dp"
                 android:text="Edit Profile"
-                android:textColor="@android:color/black"
+                android:textColor="@android:color/white"
                 app:cornerRadius="24dp"
                 app:icon="@drawable/ic_edit"
                 app:iconGravity="textStart"
-                app:iconTint="@android:color/black" />
+                app:iconTint="@color/softBackgroundColor" />
 
             <com.google.android.material.button.MaterialButton
                 android:id="@+id/btnLogout"
@@ -187,9 +184,10 @@
                 android:layout_marginTop="8dp"
                 android:padding="12dp"
                 android:text="Logout"
-                android:textColor="#1A1919"
+                android:backgroundTint="@color/red"
+                android:textColor="#fdf4de"
                 app:cornerRadius="24dp"
-                app:strokeColor="#282728"
+                app:strokeColor="#A8043B"
                 app:strokeWidth="1dp" />
 
         </LinearLayout>
@@ -201,6 +199,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:background="#1A1A1A"
+        android:layout_marginBottom="0dp"
         app:itemIconTint="@android:color/white"
         app:itemTextColor="@android:color/white"
         app:menu="@menu/bottom_nav_menu" />

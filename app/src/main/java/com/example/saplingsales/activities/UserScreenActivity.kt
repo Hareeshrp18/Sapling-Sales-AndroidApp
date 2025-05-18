@@ -80,8 +80,7 @@ class UserScreenActivity : AppCompatActivity(), NavigationView.OnNavigationItemS
     private var filteredProducts = mutableListOf<Product>()
     private var selectedCategory: String? = null
     private var searchQuery = ""
-    private var selectedPriceRange: Int = 0 // 0: All, 1: 0-50, 2: 51-100, 3: 101-200, 4: 201-300, 5: 301-400, 6: 401-500, 7: 501-600, 8: 601-700, 9: 701-800, 10: 801-900, 11: 901-1000, 12: 1000+
-
+    private var selectedPriceRange: Int = 0
     private val REQUIRED_PERMISSIONS = arrayOf(
         Manifest.permission.CAMERA,
         Manifest.permission.ACCESS_FINE_LOCATION,

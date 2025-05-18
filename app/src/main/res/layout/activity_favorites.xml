@@ -51,8 +51,8 @@
                 android:padding="32dp">
 
                 <ImageView
-                    android:layout_width="200dp"
-                    android:layout_height="200dp"
+                    android:layout_width="179dp"
+                    android:layout_height="181dp"
                     android:src="@drawable/empty_wishlist" />
 
                 <TextView

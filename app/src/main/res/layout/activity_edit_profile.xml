@@ -56,8 +56,24 @@
                 android:textColor="#000000"
                 app:icon="@drawable/ic_camera"
                 app:iconTint="#000000" />
+            <com.google.android.material.card.MaterialCardView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="24dp"
+                app:cardBackgroundColor="#1A1A1A"
+                app:cardCornerRadius="16dp"
+                app:cardElevation="4dp"
+                app:strokeColor="#333333"
+                app:strokeWidth="1dp">
+            <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:backgroundTint="@color/softBackgroundColor"
+            android:background="@color/background_light"
+            android:padding="16dp">
 
-            <!-- Name Input -->
+
             <com.google.android.material.textfield.TextInputLayout
                 android:id="@+id/tilName"
                 style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
@@ -66,13 +82,15 @@
                 android:layout_marginTop="24dp"
                 android:hint="Name"
                 app:boxStrokeColor="#000000"
-                app:hintTextColor="#1F1E1E">
+                android:textColorHint="@color/black"
+                app:hintTextColor="#000000">
 
                 <com.google.android.material.textfield.TextInputEditText
                     android:id="@+id/etName"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:inputType="textPersonName"
+                    android:textColorHint="@color/black"
                     android:textColor="@color/black" />
 
             </com.google.android.material.textfield.TextInputLayout>
@@ -86,6 +104,7 @@
                 android:layout_marginTop="16dp"
                 android:hint="Phone"
                 app:boxStrokeColor="#000000"
+                android:textColorHint="@color/black"
                 app:hintTextColor="#000000">
 
                 <com.google.android.material.textfield.TextInputEditText
@@ -93,6 +112,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:inputType="phone"
+                    android:textColorHint="@color/black"
                     android:textColor="@color/black" />
 
             </com.google.android.material.textfield.TextInputLayout>
@@ -105,7 +125,8 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="16dp"
                 android:hint="Address"
-                app:boxStrokeColor="#070707"
+                android:textColorHint="@color/black"
+                app:boxStrokeColor="#000000"
                 app:hintTextColor="#000000">
 
                 <com.google.android.material.textfield.TextInputEditText
@@ -113,6 +134,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:inputType="textPostalAddress"
+                    android:textColorHint="@color/black"
                     android:textColor="@color/black" />
 
             </com.google.android.material.textfield.TextInputLayout>
@@ -129,19 +151,24 @@
                 app:icon="@drawable/ic_location"
                 app:iconTint="#EF0808" />
 
+        </LinearLayout>
+            </com.google.android.material.card.MaterialCardView>
+
             <com.google.android.material.button.MaterialButton
                 android:id="@+id/btnSaveChanges"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="32dp"
-                android:backgroundTint="#E6E0E9"
+                android:backgroundTint="@color/colorPrimary"
                 android:padding="12dp"
                 android:text="Save Changes"
-                android:textColor="@android:color/black"
+                android:textColor="@color/softBackgroundColor"
                 app:cornerRadius="24dp" />
 
         </LinearLayout>
 
+
     </ScrollView>
+
 
 </LinearLayout>

@@ -36,7 +36,7 @@ class CartAdapter(
         private val productName: TextView = itemView.findViewById(R.id.tvProductName)
         private val productPrice: TextView = itemView.findViewById(R.id.tvProductPrice)
         private val quantityText: TextView = itemView.findViewById(R.id.tvQuantity)
-        private val availableText: TextView = itemView.findViewById(R.id.tvAvailable)
+        //private val availableText: TextView = itemView.findViewById(R.id.tvAvailable)
         private val btnIncrease: ImageButton = itemView.findViewById(R.id.btnIncrease)
         private val btnDecrease: ImageButton = itemView.findViewById(R.id.btnDecrease)
         private val btnRemove: ImageButton = itemView.findViewById(R.id.btnRemove)
@@ -45,13 +45,12 @@ class CartAdapter(
             productName.text = cartItem.productName
             productPrice.text = "₹${cartItem.price}"
             quantityText.text = cartItem.quantity.toString()
-            availableText.text = "Available: ${cartItem.availableQuantity}"
+            //availableText.text = "Available: ${cartItem.availableQuantity}"
 
-            // Enable/disable buttons based on quantity limits
+
             btnIncrease.isEnabled = cartItem.quantity < cartItem.availableQuantity
             btnDecrease.isEnabled = cartItem.quantity > 1
 
-            // Update button alpha for visual feedback
             btnIncrease.alpha = if (btnIncrease.isEnabled) 1.0f else 0.5f
             btnDecrease.alpha = if (btnDecrease.isEnabled) 1.0f else 0.5f
 

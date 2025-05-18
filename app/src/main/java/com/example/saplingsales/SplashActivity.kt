@@ -1,6 +1,7 @@
 package com.example.saplingsales
 
 import android.content.Intent
+import android.media.MediaPlayer
 import android.net.Uri
 import android.os.Bundle
 import android.os.Handler
@@ -17,6 +18,7 @@ class SplashActivity : AppCompatActivity() {
 
     private lateinit var auth: FirebaseAuth
     private lateinit var db: FirebaseFirestore
+    private var mediaPlayer: MediaPlayer? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -24,23 +26,26 @@ class SplashActivity : AppCompatActivity() {
 
         auth = FirebaseAuth.getInstance()
         db = FirebaseFirestore.getInstance()
+
         val videoView = findViewById<VideoView>(R.id.videoView)
-
-        // Path to the video in the raw folder
-        val videoUri: Uri = Uri.parse("android.resource://" + packageName + "/" + R.raw.splash_video)
-
-        // Set the video source
+        val videoUri: Uri = Uri.parse("android.resource://$packageName/${R.raw.splash_video}")
         videoView.setVideoURI(videoUri)
 
-        // Start playing the video when ready
         videoView.setOnPreparedListener {
-            it.isLooping = true // Optionally, make the video loop
+            it.isLooping = true
             videoView.start()
         }
 
+        // Play splash audio once
+        // Delay audio playback by 1 second (1000 milliseconds)
+        Handler(Looper.getMainLooper()).postDelayed({
+            mediaPlayer = MediaPlayer.create(this, R.raw.splash_audio)
+            mediaPlayer?.start()
+        }, 1000)
+
         Handler(Looper.getMainLooper()).postDelayed({
             checkUserRole()
-        }, 5000) // 2-second delay for splash screen
+        }, 5000) // 5-second delay for splash screen
     }
 
     private fun checkUserRole() {
@@ -48,27 +53,20 @@ class SplashActivity : AppCompatActivity() {
 
         if (currentUser != null) {
             val userId = currentUser.uid
-            Log.d("SplashActivity", "User ID: $userId") // Debugging log
+            Log.d("SplashActivity", "User ID: $userId")
 
-            // Check in the `users` collection first
             db.collection("users").document(userId)
                 .get()
                 .addOnSuccessListener { userDoc ->
                     if (userDoc.exists()) {
                         val role = userDoc.getString("role") ?: ""
-                        Log.d("SplashActivity", "User Role: $role") // Debugging log
-
+                        Log.d("SplashActivity", "User Role: $role")
                         when (role) {
-                            "user" -> {
-                                startActivity(Intent(this, UserScreenActivity::class.java))
-                            }
-                            else -> {
-                                startActivity(Intent(this, RoleSelectionActivity::class.java))
-                            }
+                            "user" -> startActivity(Intent(this, UserScreenActivity::class.java))
+                            else -> startActivity(Intent(this, RoleSelectionActivity::class.java))
                         }
                         finish()
                     } else {
-                        // If not found in `users`, check `saplingAdmin` collection
                         db.collection("saplingAdmin").document(userId)
                             .get()
                             .addOnSuccessListener { adminDoc ->
@@ -100,5 +98,11 @@ class SplashActivity : AppCompatActivity() {
             startActivity(Intent(this, RoleSelectionActivity::class.java))
             finish()
         }
+    }
+
+    override fun onDestroy() {
+        super.onDestroy()
+        mediaPlayer?.release()
+        mediaPlayer = null
     }
 }

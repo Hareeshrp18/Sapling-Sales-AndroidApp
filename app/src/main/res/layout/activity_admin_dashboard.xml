@@ -79,178 +79,155 @@
                 android:layout_marginHorizontal="16dp"
                 android:background="@color/forestGreen" />
 
-            <!-- Total Collection Card -->
             <com.google.android.material.card.MaterialCardView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_margin="16dp"
                 app:cardCornerRadius="20dp"
                 app:cardElevation="8dp"
-                app:strokeColor="@color/forestGreen"
-                app:strokeWidth="2dp">
+                app:strokeColor="@color/green_light"
+                app:strokeWidth="2dp"
+                android:layout_marginTop="24dp"
+                android:layout_marginBottom="24dp"
+                app:cardBackgroundColor="@android:color/white">
+
                 <LinearLayout
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
+                    android:layout_height="match_parent"
                     android:orientation="vertical"
-                    android:padding="24dp">
+                    android:padding="20dp">
+
+                    <!-- Total Collection -->
                     <TextView
                         android:id="@+id/tvTotalCollection"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
+                        android:layout_marginBottom="12dp"
                         android:text="Total Collection: ₹0.00"
-                        android:textSize="24sp"
-                        android:textStyle="bold"
-                        android:textColor="#FF9800"/>
-                </LinearLayout>
-            </com.google.android.material.card.MaterialCardView>
+                        android:textColor="#FF9800"
+                        android:textSize="20sp"
+                        android:textStyle="bold" />
 
-            <!-- Total Product Sales Card -->
-            <com.google.android.material.card.MaterialCardView
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginHorizontal="16dp"
-                android:layout_marginBottom="8dp"
-                app:cardCornerRadius="16dp"
-                app:cardElevation="4dp">
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:orientation="vertical"
-                    android:padding="18dp">
+                    <!-- Total Product Sales -->
                     <TextView
                         android:id="@+id/tvTotalProductSales"
                         android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
+                        android:layout_height="54dp"
+                        android:layout_marginBottom="16dp"
                         android:text="Total Product Saled: 0"
-                        android:textSize="20sp"
-                        android:textStyle="bold"
-                        android:textColor="#3F51B5"/>
-                </LinearLayout>
-            </com.google.android.material.card.MaterialCardView>
+                        android:textColor="#3F51B5"
+                        android:textSize="18sp"
+                        android:textStyle="bold" />
 
-            <!-- Date Range Selection for Sales Comparison -->
-            <LinearLayout
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:orientation="horizontal"
-                android:layout_gravity="center"
-                android:gravity="center"
-                android:layout_marginTop="8dp"
-                android:layout_marginBottom="8dp"
-                android:background="#F5F5F5"
-                android:padding="12dp"
-                android:elevation="2dp"
-                android:clipToPadding="false">
+                    <!-- Date Range Selection -->
+                    <LinearLayout
+                        android:layout_width="333dp"
+                        android:layout_height="154dp"
+                        android:layout_marginBottom="16dp"
+                        android:background="#FFFFFF"
+                        android:elevation="2dp"
+                        android:gravity="center"
+                        android:orientation="vertical"
+                        android:padding="8dp">
 
-                <LinearLayout
-                    android:layout_width="wrap_content"
-                    android:layout_height="48dp"
-                    android:layout_weight="1"
-                    android:orientation="horizontal"
-                    android:background="@drawable/rounded_edittext"
-                    android:gravity="center_vertical"
-                    android:layout_marginEnd="8dp">
+                        <LinearLayout
+                            android:layout_width="333dp"
+                            android:layout_height="wrap_content"
+                            android:layout_marginBottom="16dp"
+                            android:background="#FFFFFF"
+                            android:elevation="2dp"
+                            android:gravity="center"
+                            android:orientation="horizontal"
+                            android:padding="8dp">
 
-                    <ImageView
-                        android:layout_width="24dp"
-                        android:layout_height="24dp"
-                        android:src="@drawable/ic_calendar"
-                        android:layout_marginEnd="8dp"/>
+                            <!-- Start Date -->
+                            <LinearLayout
+                                android:layout_width="wrap_content"
+                                android:layout_height="48dp"
+                                android:layout_marginEnd="8dp"
+                                android:layout_weight="1"
+                                android:background="@drawable/rounded_edittext"
+                                android:gravity="center_vertical"
+                                android:orientation="horizontal"
+                                android:paddingHorizontal="8dp">
 
-                    <TextView
-                        android:id="@+id/tvStartDate"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="Start Date"
-                        android:textSize="16sp"
-                        android:textColor="#212121"/>
-                </LinearLayout>
+                                <ImageView
+                                    android:layout_width="24dp"
+                                    android:layout_height="24dp"
+                                    android:layout_marginEnd="8dp"
+                                    android:src="@drawable/ic_calendar" />
 
-                <LinearLayout
-                    android:layout_width="wrap_content"
-                    android:layout_height="48dp"
-                    android:layout_weight="1"
-                    android:orientation="horizontal"
-                    android:background="@drawable/rounded_edittext"
-                    android:gravity="center_vertical"
-                    android:layout_marginEnd="8dp">
+                                <TextView
+                                    android:id="@+id/tvStartDate"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:text="Start Date"
+                                    android:textColor="#212121"
+                                    android:textSize="16sp" />
+                            </LinearLayout>
 
-                    <ImageView
-                        android:layout_width="24dp"
-                        android:layout_height="24dp"
-                        android:src="@drawable/ic_calendar"
-                        android:layout_marginEnd="8dp"/>
+                            <!-- End Date -->
+                            <LinearLayout
+                                android:layout_width="wrap_content"
+                                android:layout_height="48dp"
+                                android:layout_marginEnd="8dp"
+                                android:layout_weight="1"
+                                android:background="@drawable/rounded_edittext"
+                                android:gravity="center_vertical"
+                                android:orientation="horizontal"
+                                android:paddingHorizontal="8dp">
 
-                    <TextView
-                        android:id="@+id/tvEndDate"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="End Date"
-                        android:textSize="16sp"
-                        android:textColor="#212121"/>
-                </LinearLayout>
+                                <ImageView
+                                    android:layout_width="24dp"
+                                    android:layout_height="24dp"
+                                    android:layout_marginEnd="8dp"
+                                    android:src="@drawable/ic_calendar" />
+
+                                <TextView
+                                    android:id="@+id/tvEndDate"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:text="End Date"
+                                    android:textColor="#212121"
+                                    android:textSize="16sp" />
+                            </LinearLayout>
+                        </LinearLayout>
 
 
+                        <Button
+                            android:id="@+id/btnCompare"
+                            android:layout_width="156dp"
+                            android:layout_height="48dp"
+                            android:backgroundTint="@color/forestGreen"
+                            android:elevation="4dp"
+                            android:paddingHorizontal="24dp"
+                            android:text="COMPARE"
+                            android:textAllCaps="true"
+                            android:textColor="@android:color/white"
+                            android:textSize="16sp" />
+                    </LinearLayout>
 
-                <Button
-                    android:id="@+id/btnCompare"
-                    android:layout_width="wrap_content"
-                    android:layout_height="48dp"
-                    android:text="COMPARE"
-                    android:textAllCaps="true"
-                    android:textSize="16sp"
-                    android:backgroundTint="@color/forestGreen"
-                    android:textColor="@android:color/white"
-                    android:paddingHorizontal="24dp"
-                    android:elevation="4dp"/>
-            </LinearLayout>
 
-            <com.google.android.material.card.MaterialCardView
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginHorizontal="16dp"
-                android:layout_marginBottom="12dp"
-                android:background="@color/white"
-                app:cardCornerRadius="16dp"
-                app:cardElevation="4dp">
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:orientation="vertical"
-                    android:background="@color/white"
-                    android:padding="18dp">
+                    <!-- Custom Range Result -->
                     <TextView
                         android:id="@+id/tvCustomComparisonResult"
                         android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
+                        android:layout_height="57dp"
+                        android:layout_marginBottom="12dp"
+                        android:gravity="center"
                         android:text="Select a date range and tap Compare."
-                        android:textSize="17sp"
                         android:textColor="#000000"
-                        android:gravity="center"/>
-                </LinearLayout>
-            </com.google.android.material.card.MaterialCardView>
+                        android:textSize="16sp" />
 
-            <!-- Sales Comparison Card -->
-            <com.google.android.material.card.MaterialCardView
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginHorizontal="16dp"
-                android:layout_marginBottom="16dp"
-                app:cardCornerRadius="16dp"
-                app:cardElevation="4dp">
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:orientation="vertical"
-                    android:background="@color/white"
-                    android:padding="18dp">
+                    <!-- Monthly Comparison -->
                     <TextView
                         android:id="@+id/tvSalesComparison"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
+                        android:layout_width="169dp"
+                        android:layout_height="100dp"
                         android:text="This Month: ₹0.00\nLast Month: ₹0.00\nChange: 0%"
-                        android:textSize="17sp"
-                        android:textColor="@color/black"/>
+                        android:textColor="@android:color/black"
+                        android:textSize="16sp" />
+
                 </LinearLayout>
             </com.google.android.material.card.MaterialCardView>
 
